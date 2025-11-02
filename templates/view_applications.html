@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Applications{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 0;
+    }
+    .container {
+        position: relative;
+        z-index: 1;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        color: white;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        background: linear-gradient(135deg, #FF6B6B, #45B7D1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        
+    }
+    .table {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    th {
+        background: linear-gradient(135deg, #FF6B6B, #45B7D1);
+        color: white;
+        padding: 15px;
+        text-align: left;
+    }
+    td {
+        color: #333;
+        padding: 12px;
+    }
+    .text-center {
+        text-align: center;
+        color: rgb(35, 3, 3);
+        font-size: 1.2rem;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 10px;
+    }
+
+    
+   
+</style>
+
+<div class="container">
+    <h2 class="text-center">Job Applications</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Applicant Name</th>
+                <th>Email</th>
+                <th>Applied Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if applications %}
+                {% for app in applications %}
+                    <tr>
+                        <td>{{ app.job_title }}</td>
+                        <td>{{ app.employee_name }}</td>
+                        <td>{{ app.employee_email }}</td>
+                        <td>{{ app.applied_at }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">No applications found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

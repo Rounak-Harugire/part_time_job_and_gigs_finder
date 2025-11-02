@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}My Applications{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #FF6B6B, #45B7D1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-text {
+            margin-bottom: 0.5rem;
+        }
+
+        .no-applications {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            color: #333;
+        }
+    </style>
+
+    <div class="container">
+        <h2>My Job Applications</h2>
+        <div class="row">
+            {% if applications %}
+                {% for app in applications %}
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ app.title }}</h5>
+                                <p class="card-text"><strong>Employer:</strong> {{ app.employer_name }}</p>
+                                <p class="card-text"><strong>Location:</strong> {{ app.address }}</p>
+                                <p class="card-text"><strong>Duration:</strong> {{ app.duration }}</p>
+                                <p class="card-text"><strong>Applied On:</strong> {{ app.application_date }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-applications">
+                    <p>You haven't applied for any jobs yet.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

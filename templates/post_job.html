@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part-Time Job Finder - Post a Job</title>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+        body {
+            background: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: black;
+            padding: 15px 20px;
+            z-index: 1000; /* Ensure navbar stays on top */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #45B7D1;
+        }
+
+        /* Adjusting login container to avoid navbar overlap */
+        .login-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.6s ease-out;
+            margin-top: 80px; /* Prevent overlap */
+        }
+
+        .login-container h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #FF6B6B, #45B7D1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .boxdif {
+            width: 100%;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        input {
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #e0e0e0;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #45B7D1;
+            box-shadow: 0 0 0 3px rgba(69, 183, 209, 0.2);
+        }
+
+        input::placeholder {
+            color: #95a5a6;
+        }
+
+        button {
+            padding: 1rem;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(135deg, #FF6B6B, #45B7D1);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        } 
+        .logo{
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .login-container h2 {
+                font-size: 2rem;
+            }
+            
+            input, button {
+                padding: 0.9rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">Part-Time Job Finder</div>
+        <div>
+          <a href="{{ url_for('home') }}" class="nav-btn home-btn">Home</a>
+            <a href="{{ url_for('login') }}" class="nav-btn login-btn">Login</a>
+            <a href="{{ url_for('register') }}" class="nav-btn register-btn">Register</a>
+            <a href="{{ url_for('jobs') }}" class="nav-btn jobs-btn">View Jobs</a>
+        </div>
+    </nav>
+    <!-- Job Posting Form -->
+    <div class="login-container">
+        <h2>Post a Job</h2>
+        <div class="boxdif">
+            <form method="POST" action="#">
+                <input type="text" name="title" placeholder="Job Title" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="text" name="address" placeholder="Job Address" required>
+                <input type="text" name="duration" placeholder="Duration" required>
+            
+                <!-- Minimum Qualification Dropdown -->
+                <select name="qualification" id="qualification" required onchange="showOtherInput()">
+                    <option value="" disabled selected>Minimum Qualification</option>
+                    <option value="High School">High School</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Bachelor's Degree">Bachelor's Degree</option>
+                    <option value="Master's Degree">Master's Degree</option>
+                    <option value="PhD">PhD</option>
+                    <option value="Other">Other</option>
+                </select>
+            
+                <!-- Custom Input for "Other" Qualification -->
+                <input type="text" id="other-qualification" name="other_qualification" placeholder="Enter Qualification" style="display:none;">
+            
+                <button type="submit">Post Job</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+<script>
+      function showOtherInput() {
+        var qualification = document.getElementById("qualification").value;
+        var otherInput = document.getElementById("other-qualification");
+
+        if (qualification === "Other") {
+            otherInput.style.display = "block";
+            otherInput.setAttribute("required", "true");
+        } else {
+            otherInput.style.display = "none";
+            otherInput.removeAttribute("required");
+        }
+    }
+</script>
+</script>
+</html>
